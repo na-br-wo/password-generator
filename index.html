@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
-    <link rel="stylesheet" href="style.css" />
+    <script src="./assets/script.js" defer></script>
+    <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
     <div class="wrapper">
@@ -18,17 +19,64 @@
         </div>
         <div class="card-body">
           <textarea
-            readonly
             id="password"
             placeholder="Your Secure Password"
             aria-label="Generated Password"
           ></textarea>
         </div>
+
+        <!-- creating a form element for password prompts
+        using modal as a class so it will pop up when user
+        clicks the generate password button -->
+        <div class="modal" id="modal">
+          <!-- modal body, which will contain form for password prompts -->
+          <div class="modalContent">
+            <form id="passwordPrompts" class="form">
+              <div class="pwordLengthContainer">
+                <label for="pwordLengthNumber">Number of Characters</label>
+                <!-- setting range of password length from 8 to 128 -->
+                <!-- have 12 as a default value -->
+                <input type="range" min="8" max="128" value="12" id="pwordLengthRange">
+                <input class = "numberInput" type="number" min="8" max="128" value="12" id="pwordLengthNumber">
+              </div>
+
+              <!-- setting up checkboxes for password character prompts -->
+              <!-- removed lowercase checkbox because it makes
+              sense to include lowercase by default -->
+              <!-- <div>
+                <label for="includeLowercase">Include Lowercase</label>
+                <input type="checkbox" id="includeLowercase">
+              </div> -->
+              
+              <div>
+                <label for="includeUppercase">Include Uppercase</label>
+                <input type="checkbox" id="includeUppercase">
+              </div>
+              
+              <div>
+                <label for="includeNumeric">Include Numeric</label>
+                <input type="checkbox" id="includeNumeric">
+              </div>
+
+              <div>
+                <label for="includeSpecialChars">Include Special Characters</label>
+              <input type="checkbox" id="includeSpecialChars">
+            </div> 
+            </form>
+          </div>
+          <!-- buttons to close modal or confirm and generate pword -->
+          <div class="modalBtns">
+            <button class="closeBtn">Close</button>
+            <button class="confirmBtn">Confirm</button>
+          </div>
+        </div>
+
         <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+          <button id="showPrompts" class="btn">Generate Password</button>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <!-- overlay which appears when modal is opened -->
+    <div id="overlay"></div>
   </body>
 </html>

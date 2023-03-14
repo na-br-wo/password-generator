@@ -54,6 +54,112 @@ header {
   min-height: 100px;
 }
 
+/* the modal that appears when "Generate Password" button is clicked */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* transform and top/left % are centering the modal
+  using scale(0) to hide modal when is is not needed */
+  transform: translate(-50%, -50%) scale(0);
+  transition: 0.2s ease-in-out;
+  border: 1px solid hsl(206, 17%, 28%);
+  border-radius: 5px;
+  /* setting a high z index so modal appears on top of other elements */
+  z-index: 20;
+  background-color: white;
+  width: 500px;
+  max-width: 70%;
+}
+
+/* adding .active class to modal so it can be toggled on and off */
+/* using scale as methold of showing/hiding modal so we can
+transition smoothly onclick events */
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modalContent {
+  padding: 7px 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  row-gap: 5px;
+}
+
+.pwordLengthContainer {
+  display: flex;
+  align-items: center;
+}
+
+.numberInput {
+  width: 3rem;
+}
+
+.modalBtns {
+  padding-bottom: 7px;
+  padding-left: 7px;
+  display: flex;
+  justify-content: center;
+  transition: .3s;
+}
+
+.closeBtn {
+  margin-right: 5px;
+  padding: 3px 5px;
+  background-color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 4px;
+  transition: 0.15s;
+}
+
+.confirmBtn{
+  background-color: hsl(360, 91%, 36%);
+  color: hsl(0, 0%, 100%);
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 3px 5px;
+  transition: 0.3s;
+}
+
+.confirmBtn:hover {
+  background-color: hsl(0, 75%, 35%);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  background-color: #bfbebe;
+  text-decoration: none;
+  cursor: pointer
+}
+
+/* adding a background effect when modal is opened */
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  /* making sure overlay does not impede click events */
+  pointer-events: none;
+}
+
+/* adding active class to overlay to toggle on and off */
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
 .card-footer {
   text-align: center;
 }
@@ -72,12 +178,10 @@ header {
   clear: both;
 }
 
-.btn {
+#showPrompts {
   border: none;
   background-color: hsl(360, 91%, 36%);
   border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
-    0px;
   color: hsl(0, 0%, 100%);
   display: inline-block;
   font-size: 22px;
@@ -85,6 +189,13 @@ header {
   margin: 16px 16px 16px 20px;
   padding: 14px 34px;
   text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#showPrompts:hover {
+  background-color: hsl(0, 75%, 35%);
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -119,7 +230,7 @@ button[disabled] {
 }
 
 @media (max-width: 690px) {
-  .btn {
+  #showPrompts {
     font-size: 1rem;
     margin: 16px 0px 0px 0px;
     padding: 10px 15px;
@@ -131,7 +242,7 @@ button[disabled] {
 }
 
 @media (max-width: 500px) {
-  .btn {
+  #showPrompts {
     font-size: 0.8rem;
   }
 }
